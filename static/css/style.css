@@ -19,6 +19,10 @@ article {
   width: 67%;
 }
 
+.content {
+  min-height: calc(100vh - 10vw);
+}
+
 section::after {
   content: "";
   display: table;
