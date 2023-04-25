@@ -38,16 +38,26 @@
             </div>
         {% endfor %}
     </article>
-    <nav aria-label="pagination">
-        <ul class="pagination pagination-sm">
-            {% for i in range (num|length) %}
-                {% if loop.first %}
-                    <li class="page-item disabled"><a class="page-link" href="/news/1" tabindex="-1">1</a></li>
-                {% else %}
-            <li class="page-item"><a class="page-link" href="/news/{{i}}">{{i}}</a></li>
-                {% endif %}
-            {% endfor %}
-          </ul>
+    <nav aria-label="paginatione" style="width: 100%;">
+        <ul class="pagination justify-content-center">
+            {% if real_len % 5 > 0 %}
+                {% for i in range(1, num + 2) %}
+                    {% if i == now_num %}
+                        <li class="page-item active" style="padding: 0 0 0 0; width=1vw;"><a class="page-link" href="/news/{{i}}">{{i}}</a></li>
+                    {% else %}
+                        <li class="page-item" style="padding: 0 0 0 0; width=1vw;"><a class="page-link" href="/news/{{i}}">{{i}}</a></li>
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                {% for i in range(1, num + 1) %}
+                    {% if i == now_num %}
+                        <li class="page-item active" style="padding: 0 0 0 0; width=1vw;"><a class="page-link" href="/news/{{i}}">{{i}}</a></li>
+                    {% else %}
+                        <li class="page-item" style="padding: 0 0 0 0; width=1vw;"><a class="page-link" href="/news/{{i}}">{{i}}</a></li>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        </ul>
     </nav>
 {% endblock %}
 

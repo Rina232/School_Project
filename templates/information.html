@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <title>{{inf['school_name']}}</title>
+    <link rel="stylesheet"
+          href="static/css/style.css" type="text/css">
+    <link rel="shortcut icon" href="static/img/logo.jpg" type="image/jpg">
+{% endblock %}
+
+{% block school_name %}
+    {{inf['school_name']}}
+{% endblock %}
+
+{% block attention %}
+    {{attention}}
+{% endblock %}
+
+{% block link %}
+    <a href="/">Главная</a><a> / Информация</a>
+{% endblock %}
+
+{% block content %}
+    {% for i in information %}
+        {% if loop.first %}
+            <h5 style="font-size: 1.7vw; margin-bottom: 2vw;"><b>{{i}}</b></h5>
+        {% elif '{' == i[0] %}
+            <img src="../static/img/actual/{{i[1:-2]}}" alt="Здесь должна быть картинка, но она не нашлась." style="border-radius: 15px; margin-top: 0.5vw; max-width: 50vw;  margin-bottom: 2vw;">
+        {% elif '*' == i[0] %}
+            <p><b>{{i[1:]}}</b></p>
+        {% elif '~' == i[0] %}
+            <p><i>{{i[1:]}}</i></p>
+        {% elif '@' == i[0] %}
+            <li>{{i[1:]}}</li>
+        {% elif not i[0] %}
+            <br>
+        {% else %}
+            <p>{{i}}</p>
+        {% endif %}
+    {% endfor %}
+{% endblock %}
+
+{% block footer %}
+        <h3 style="margin-left: 2vw; margin-bottom: 1.5vw;"><b>{{inf['full_school_name']}}</b></h3>
+        <p style="margin-left: 2vw; ">{{inf['address']}}<br>{{inf['phone_number']}}<br> {{inf['email']}}</p>
+{% endblock %}

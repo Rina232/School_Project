@@ -3,7 +3,7 @@ import xlrd3
 
 app = Flask(__name__)
 
-with open('static/documents/information.txt', encoding='utf8') as f:
+with open('static/documents/inf.txt', encoding='utf8') as f:
     data = f.readlines()
 
 inf = {'school_name': data[0].strip(),
@@ -113,6 +113,15 @@ try:
 except Exception as e:
     print(e)
 
+information = []
+try:
+    with open("static/documents/information.txt", encoding='utf8') as f:
+        data = f.readlines()
+    for i in data:
+        information.append(i.strip())
+except Exception as e:
+    print(e)
+
 
 @app.route('/')
 def main_page():
@@ -201,10 +210,12 @@ def actual_page(name):
 def news1_page(value):
     if value.isnumeric() and len(news) >= int(value) * 5:
         data = news[(int(value) - 1) * 5: int(value) * 5]
-        return render_template('news.html', inf=inf, attention=at, news=data, num=len(news) // 5, now_num=value)
+        return render_template('news.html', inf=inf, attention=at, news=data, num=len(news) // 5,
+                               now_num=int(value), real_len=len(news))
     elif value.isnumeric() and int(value) * 5 - len(news) <= 5:
         data = news[(int(value) - 1) * 5:]
-        return render_template('news.html', inf=inf, attention=at, news=data)
+        return render_template('news.html', inf=inf, attention=at, news=data, num=len(news) // 5,
+                               now_num=int(value), real_len=len(news))
     doc, date = [(i['doc'], i['date']) for i in news if i['name'] == value][0]
     try:
         with open(f'static/documents/news/{doc}', encoding='utf8') as f:
@@ -215,6 +226,11 @@ def news1_page(value):
             raise Exception('Файл пустой')
     except Exception as e:
         return render_template('conclusion_news.html', inf=inf, attention=at)
+
+
+@app.route('/information')
+def information_page():
+    return render_template('information.html', inf=inf, attention=at, information=information)
 
 
 if __name__ == '__main__':
