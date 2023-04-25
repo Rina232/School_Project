@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <title>{{inf['school_name']}}</title>
+    <link rel="stylesheet"
+          href="../static/css/style.css" type="text/css">
+    <link rel="shortcut icon" href="../static/img/logo.jpg" type="image/jpg">
+{% endblock %}
+
+{% block school_name %}
+    {{inf['school_name']}}
+{% endblock %}
+
+{% block attention %}
+    {{attention}}
+{% endblock %}
+
+{% block link %}
+    <a href="/">Главная</a><a> / Опросы</a>
+{% endblock %}
+
+{% block content %}
+    <h1 style="margin-top: 5vw;"><b>{{con}}</b></h1>
+    <form action="/polls">
+        <button style="margin-left: 17vw; background-color:#35a155; width: 30vw; height: 5vw;">Вернуться к другим опросам</button>
+    </form>
+{% endblock %}
+
+{% block footer %}
+        <h3 style="margin-left: 2vw; margin-bottom: 1.5vw;"><b>{{inf['full_school_name']}}</b></h3>
+        <p style="margin-left: 2vw; ">{{inf['address']}}<br>{{inf['phone_number']}}<br> {{inf['email']}}</p>
+{% endblock %}

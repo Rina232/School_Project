@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <title>{{inf['school_name']}}</title>
+    <link rel="stylesheet"
+          href="static/css/style.css" type="text/css">
+    <link rel="shortcut icon" href="static/img/logo.jpg" type="image/jpg">
+{% endblock %}
+
+{% block school_name %}
+    {{inf['school_name']}}
+{% endblock %}
+
+{% block attention %}
+    {{attention}}
+{% endblock %}
+
+{% block link %}
+    <a>Главная</a>
+{% endblock %}
+
+{% block content %}
+    <article style="width: 55%;">
+        <h5 style="text-align: center; margin-bottom: 3.5vw; font-size: 1.7vw;"><b>Новости и объявления</b></h5>
+        {% for i in news %}
+            <div class="card" style="width: 100%; margin-bottom: 2vw;">
+                <h3 class="card-header" style="color: #5b616e;">{{i['date']}}</h3>
+                {% if i['pic'] != '' %}
+                    <img class="card-img-top" src="static/img/news/{{i['pic']}}" alt="Здесь должна быть картинка, но она не нашлась.">
+                {% endif %}
+                <div class="card-body">
+                    <h2 class="card-title"><b>{{i['name']}}</b></h2>
+                    {% if i['text'] != '' %}
+                        <p class="card-text" style="font-size: 1.1vw;">{{i['text']}}</p>
+                    {% endif %}
+                    <a href="/news/{{i['name']}}" class="btn btn-primary" style="font-size: 1.1vw; margin-top: 1vw;">Подробнее</a>
+                </div>
+            </div>
+        {% endfor %}
+    </article>
+
+    <article style="width: 35%; margin-left: 3vw;">
+        <h5 style="text-align: center; margin-bottom: 3.5vw; font-size: 1.7vw;"><b>Актуальное</b></h5>
+        {% for i in actual[::-1] %}
+            <a href="/actual/{{i['name']}}"><img src="../static/img/actual/{{i['pic']}}" alt="Здесь должна быть картинка, но она не нашлась." style="border-radius: 15px; margin-top: 0.5vw;"></a>
+        {% endfor %}
+    </article>
+
+    <article><a href="/news" style="width: 100%;">Все новости</a></article>
+{% endblock %}
+
+{% block footer %}
+        <h3 style="margin-left: 2vw; margin-bottom: 1.5vw;"><b>{{inf['full_school_name']}}</b></h3>
+        <p style="margin-left: 2vw; ">{{inf['address']}}<br>{{inf['phone_number']}}<br> {{inf['email']}}</p>
+{% endblock %}

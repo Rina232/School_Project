@@ -1,0 +1,134 @@
+* {
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+nav {
+  float: left;
+  width: 30%;
+}
+
+article {
+  float: left;
+  margin-top: 2vw;
+  width: 67%;
+}
+
+section::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+footer {
+  background-color: #4b4d4b;
+  margin-top: 10vw;
+  text-align: left;
+  display: block;
+  color: white;
+}
+
+.bottomleft {
+    position: absolute;
+    top: 32vw;
+    left: 2vw;
+    font-size: 5.5vw;
+    color: #1b4d22;
+    font-variant: small-caps;
+    font-weight: bold;}
+
+.bottomleft span {
+    display: inline;
+	background-color: rgba(255, 255, 255, 0.9);
+	border-radius: 10px;
+	padding: 0 1vw 0 0;
+	line-height: 5.5vw;}
+
+img {
+    display: block;
+    object-fit: cover;
+    width: 100%;
+    height: auto;}
+
+li {
+  position: relative;
+  font-size: 1.2vw;
+  padding: 0.5em 0.5em 0.5em 2em;
+}
+
+a {
+  color: #1b4d22;
+  font-size: 1.5vw;
+  text-decoration: none;}
+
+a:hover {
+  color: #1b4d22;}
+
+button {
+    background-color: #1c542d;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    margin-left: 5.5vw;
+    margin-top: 2vw;
+    width: 19vw;
+    height: 3.5em;
+    text-align: center;
+    font-size: 2vw;}
+
+marquee{
+    margin-top: 1vw;
+    color: red;
+    font-size: 1.5vw;}
+
+h1{
+    font-size: 3.2vw;
+    text-align: center;
+    margin-bottom: 3vw;}
+
+h2{
+    font-size: 1.2vw;}
+
+h3{
+    font-size: 1.1vw;}
+
+h4{
+    font-size: 1.5vw;}
+
+p{
+    font-size: 1.2vw;
+    line-height: 2.5vw;}
+
+table {
+    width: 100%;
+    font-size: 1.1vw;
+}
+
+table, th, td {
+  border: 1px solid grey;
+  border-collapse: collapse;
+}
+
+th {
+    font-size: 1.5vw;
+    text-align: center;}
+
+form.poll_form {
+    margin-top: 1.5vw;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #bce8c9;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+label {
+    font-size: 1.3vw;}
+
+input::placeholder {
+    font-size: 1.3vw;}

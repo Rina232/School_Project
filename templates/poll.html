@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <title>{{inf['school_name']}}</title>
+    <link rel="stylesheet"
+          href="../static/css/style.css" type="text/css">
+    <link rel="shortcut icon" href="../static/img/logo.jpg" type="image/jpg">
+{% endblock %}
+
+{% block school_name %}
+    {{inf['school_name']}}
+{% endblock %}
+
+{% block attention %}
+    {{attention}}
+{% endblock %}
+
+{% block link %}
+    <a href="/">Главная</a><a href="/polls"> / Опросы</a><a> / {{name}}</a>
+{% endblock %}
+
+{% block content %}
+<h1><b>{{name}}</b></h1>
+<div>
+    <form class="poll_form" method="post">
+        {% set key_form_control = [0] %}
+        {% set key_form_radio = [0] %}
+        {% set key_form_checkbox = [0] %}
+        {% set tempname = [] %}
+        {% for i in quest %}
+            {% if 'список' == i[:6] and key_form_control[-1] == 0 %}
+                <div class="form-group">
+                    <label style="margin-top: 1vw;">{{i[7:]}}</label>
+                    <select class="form-control" name="{{i[7:]}}" style="height: 2.5vw;">
+                        <option></option>
+                        {% set temp1 = key_form_control.append(1) %}
+            {% elif 'строка' == i[:6] %}
+                <input class="form-control" placeholder="{{i[7:]}}" name="{{i[7:]}}" style="margin-top: 1vw; height: 2.5vw;">
+            {% elif 'текст' == i[:5] %}
+                <label style="margin-top: 1vw;">{{i[6:]}}</label>
+                        <textarea class="form-control" name="{{i[6:]}}" style="height: 9vw;"></textarea>
+            {% elif 'выбор' == i[:5] and key_form_radio[-1] == 0 %}
+                <div class="form-group">
+                    {% set temp7 = tempname.append(i[6:]) %}
+                    <label style="margin-top: 1vw;">{{i[6:]}}</label>
+                    {% set temp2 = key_form_radio.append(1) %}
+            {% elif 'множ выбор' == i[:10] and key_form_checkbox[-1] == 0 %}
+                    <label style="margin-top: 1vw;" class="form-check-label">{{i[11:]}}</label>
+                    <div class="form-group">
+                    {% set temp5 = key_form_checkbox.append(1) %}
+            {% elif 'кон' == i[:3]%}
+                {% if key_form_control[-1] == 1 %}
+                    </select>
+                {% endif %}
+                </div>
+                {% set temp3 = key_form_control.append(0) %}
+                {% set temp4 = key_form_radio.append(0) %}
+                {% set temp6 = key_form_checkbox.append(0) %}
+            {% elif key_form_radio[-1] == 1 %}
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="{{ tempname[-1] }}" value="{{i}}" style="width: 1.3vw; height: 1.3vw;" checked>
+                        <label class="form-check-label">{{i}}</label>
+                    </div>
+            {% elif key_form_checkbox[-1] == 1 %}
+                    <input class="form-check-input" type="checkbox" name="{{i}}" value="{{i}}" style="width: 1.3vw; height: 1.3vw;">
+                    <label class="form-check-label">{{i}}</label><br>
+            {% elif key_form_control[-1] == 1 %}
+                <option>{{i}}</option>
+            {% endif %}
+        {% endfor %}
+        <button type="submit" class="btn btn-primary" style="margin-left: 23vw; font-size: 1.3vw;">Отправить</button>
+    </form>
+</div>
+{% endblock %}
+
+{% block footer %}
+        <h3 style="margin-left: 2vw; margin-bottom: 1.5vw;"><b>{{inf['full_school_name']}}</b></h3>
+        <p style="margin-left: 2vw; ">{{inf['address']}}<br>{{inf['phone_number']}}<br> {{inf['email']}}</p>
+{% endblock %}
