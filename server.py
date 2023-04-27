@@ -25,9 +25,9 @@ schedule = []
 try:
     workbook = xlrd3.open_workbook("static/documents/schedule.xlsx")
     worksheet = workbook.sheet_by_index(0)
-    for i in range(0, 230):
+    for i in range(int(worksheet.cell_value(1, 12))):
         lst = []
-        for j in range(0, 11):
+        for j in range(11):
             if type(worksheet.cell_value(i, j)) is float:
                 lst.append(int(worksheet.cell_value(i, j)))
             else:
